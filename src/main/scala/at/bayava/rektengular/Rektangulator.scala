@@ -6,24 +6,38 @@ package at.bayava.rektengular
 class Rektangulator(val word: String) {
 
 
-	def rektangulate(width: Int, heigth: Int):String = {
-		val allLines = 0 until (heigth * word.length - 1)
+	def rektangulate(width: Int, heigth: Int): String = {
+
+		def calculateHeigth(heigth: Int): Range = heigth match {
+			case 1 => 1 to 1
+			case n => 1 until heigth * word.length
+		}
+
+		val allLines: Range = calculateHeigth(heigth)
 		val sb = StringBuilder.newBuilder
 		for {
 			currentLine <- allLines
-			currentWord <- 0 until width
 		} yield {
-			sb ++= writeLine(currentLine, currentWord)
+			sb ++= writeLine(currentLine, width) ++= "\r\n"
 		}
 
 		println(sb.mkString)
 		sb.mkString
 	}
 
-	private def writeLine(currentLine: Int, currentWord: Int):String = {println(currentLine+":"+currentWord)
-		currentWord match {
-		case even if even % 2 == 0 => word
-		case odd if odd % 2 == 1 => word.reverse.drop(1)
-	}
+
+	private def writeLine(currentLine: Int, width: Int): String = {
+		val sb = StringBuilder.newBuilder
+		println(currentLine + ":")
+		for {
+			currentWord <- 0 until width
+		} yield {
+			val nextPart = currentWord match {
+				case even if even % 2 == 0 => word
+				case odd if odd % 2 == 1 => word.reverse.drop(1)
+			}
+			sb ++= nextPart
+		}
+		sb.mkString
 	}
 }
