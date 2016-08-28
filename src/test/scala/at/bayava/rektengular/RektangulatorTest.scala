@@ -44,6 +44,9 @@ class RektangulatorTest extends FunSpec {
 			it("should produce 'tkeRekt' as fourth line") {
 				assert(rektangulate.lines.drop(3).next == "tkeRekt")
 			}
+			it("should produce 'RektkeR' as final line") {
+				assert(rektangulate.lines.toList.last == "RektkeR")
+			}
 		}
 
 		describe("if called with (2,3)") {
