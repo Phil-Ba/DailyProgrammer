@@ -35,6 +35,15 @@ class RektangulatorTest extends FunSpec {
 			it("should produce 'RektkeR' as first line") {
 				assert(rektangulate.lines.next == "RektkeR")
 			}
+			it("should produce 'e  k  e' as second line") {
+				assert(rektangulate.lines.drop(1).next == "e  k  e")
+			}
+			it("should produce 'k  e  k' as third line") {
+				assert(rektangulate.lines.drop(2).next == "k  e  k")
+			}
+			it("should produce 'tkeRekt' as fourth line") {
+				assert(rektangulate.lines.drop(3).next == "tkeRekt")
+			}
 		}
 
 		describe("if called with (2,3)") {
