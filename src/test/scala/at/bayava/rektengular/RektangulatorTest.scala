@@ -36,6 +36,15 @@ class RektangulatorTest extends FunSpec {
 				assert(rektangulate.lines.next == "RektkeR")
 			}
 		}
+
+		describe("if called with (2,3)") {
+			val rektangulate: String = cut.rektangulate(2, 3)
+
+			it("should return ten lines") {
+				val expectedHeigth: Int = "Rekt".length * 3 - 1
+				assert(rektangulate.lines.length == expectedHeigth)
+			}
+		}
 	}
 
 
