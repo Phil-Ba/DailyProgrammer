@@ -1,4 +1,4 @@
-package at.baya.splurth
+package at.bayava.splurth
 
 import org.junit.runner.RunWith
 import org.scalatest.FunSpec

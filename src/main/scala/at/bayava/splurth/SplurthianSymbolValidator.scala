@@ -1,4 +1,4 @@
-package at.baya.splurth
+package at.bayava.splurth
 
 /**
 	* Created by philba on 8/25/16.
