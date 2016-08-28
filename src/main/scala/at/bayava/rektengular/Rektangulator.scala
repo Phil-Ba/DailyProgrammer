@@ -26,7 +26,7 @@ class Rektangulator(val word: String) {
 	}
 
 
-	private def writeLine(currentLine: Int, width: Int, lastLine:Int): String = {
+	private def writeLine(currentLine: Int, width: Int, lastLine: Int): String = {
 		println(currentLine + ":")
 		currentLine match {
 			case wholeLine if wholeLine == 1 => writeWholeLine(width, wholeLine)
@@ -53,5 +53,10 @@ class Rektangulator(val word: String) {
 			sb ++= nextPart
 		}
 		sb.mkString
+	}
+
+
+	private[rektengular] def calculateLettersForOtherLines(currentLine: Int): (Char, Char) = {
+		('a', 'b')
 	}
 }

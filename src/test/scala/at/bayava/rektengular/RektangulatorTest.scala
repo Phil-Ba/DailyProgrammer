@@ -57,7 +57,11 @@ class RektangulatorTest extends FunSpec {
 				assert(rektangulate.lines.length == expectedHeigth)
 			}
 		}
+
+		describe("the method calculateLettersForOtherLines") {
+			it("should return (e,k) for the second line") {
+				assert(cut.calculateLettersForOtherLines(2) == ('e', 'k'))
+			}
+		}
 	}
-
-
 }
