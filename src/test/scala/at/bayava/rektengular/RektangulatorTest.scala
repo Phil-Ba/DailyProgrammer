@@ -14,10 +14,10 @@ class RektangulatorTest extends FunSpec {
 		val cut = new Rektangulator("Rekt")
 		describe("the method rektangulate") {
 			describe("if called with (1,1)") {
-				val rektangulate: String = cut.rektangulate(1, 1)
+				def rektangulate: String = cut.rektangulate(1, 1)
 
-				it("should only return one line") {
-					assert(rektangulate.lines.length == 1)
+				it("should return 4 lines") {
+					assert(rektangulate.lines.length == 4)
 				}
 				it("should produce 'Rekt' as first line") {
 					assert(rektangulate.lines.next == "Rekt")
@@ -26,7 +26,7 @@ class RektangulatorTest extends FunSpec {
 		}
 
 		describe("if called with (2,2)") {
-			val rektangulate: String = cut.rektangulate(2, 2)
+			def rektangulate: String = cut.rektangulate(2, 2)
 
 			it("should return seven lines") {
 				val expectedHeigth: Int = "Rekt".length * 2 - 1
@@ -50,11 +50,10 @@ class RektangulatorTest extends FunSpec {
 		}
 
 		describe("if called with (2,3)") {
-			val rektangulate: String = cut.rektangulate(2, 3)
+			def rektangulate: String = cut.rektangulate(2, 3)
 
 			it("should return ten lines") {
-				val expectedHeigth: Int = "Rekt".length * 3 - 1
-				assert(rektangulate.lines.length == expectedHeigth)
+				assert(rektangulate.lines.length == 10)
 			}
 		}
 
@@ -68,11 +67,20 @@ class RektangulatorTest extends FunSpec {
 			it("should return (k,e) for the fifth line") {
 				assert(cut.calculateLettersForOtherLines(5) == ('k', 'e'))
 			}
+			it("should return (k,e) for the ninth line") {
+				assert(cut.calculateLettersForOtherLines(9) == ('k', 'e'))
+			}
+		}
+
+		describe("the method writeWholeLine") {
+			it("should return 'RektkeRektkeR' for the first line an a width of 4") {
+				assert(cut.writeWholeLine(4, 1) == "RektkeRektkeR")
+			}
 		}
 	}
 
 	describe("For the word 'AbcdE'") {
-		val cut = new Rektangulator("AbcdE")
+		def cut = new Rektangulator("AbcdE")
 		describe("the method calculateLettersForOtherLines") {
 			it("should return (b,d) for the second line") {
 				assert(cut.calculateLettersForOtherLines(2) == ('b', 'd'))
@@ -96,7 +104,7 @@ class RektangulatorTest extends FunSpec {
 	}
 
 	describe("For the word 'AbcdeF'") {
-		val cut = new Rektangulator("AbcdeF")
+		def cut = new Rektangulator("AbcdeF")
 		describe("the method calculateLettersForOtherLines") {
 			it("should return (b,e) for the second line") {
 				assert(cut.calculateLettersForOtherLines(2) == ('b', 'e'))
@@ -114,5 +122,30 @@ class RektangulatorTest extends FunSpec {
 				assert(cut.calculateLettersForOtherLines(7) == ('e', 'b'))
 			}
 		}
+
+		describe("the method rektangulate(3, 3)") {
+			it("should match the expected output") {
+				val expectedResult =
+					"""AbcdeFedcbAbcdeF
+						|b    e    b    e
+						|c    d    c    d
+						|d    c    d    c
+						|e    b    e    b
+						|FedcbAbcdeFedcbA
+						|e    b    e    b
+						|d    c    d    c
+						|c    d    c    d
+						|b    e    b    e
+						|AbcdeFedcbAbcdeF
+						|b    e    b    e
+						|c    d    c    d
+						|d    c    d    c
+						|e    b    e    b
+						|FedcbAbcdeFedcbA""".stripMargin
+
+				assert(cut.rektangulate(3, 3) == expectedResult.mkString)
+			}
+		}
+
 	}
 }
