@@ -57,6 +57,19 @@ class Rektangulator(val word: String) {
 
 
 	private[rektengular] def calculateLettersForOtherLines(currentLine: Int): (Char, Char) = {
-		('a', 'b')
+		val possibleCharacters: String = word.drop(1).dropRight(1)
+
+		//both streams contain a "filler" element because we need to account for the normal lines
+		val firstLetterStream: Stream[Int] = Stream.continually(
+			(0 to possibleCharacters.length) ++ (0 until possibleCharacters.length).reverse
+		).flatten
+		val secondLetterStream: Stream[Int] = Stream.continually(
+			(0 until possibleCharacters.length).reverse ++ (-1 until possibleCharacters.length)
+		).flatten
+
+		//1 because of zero index and 1 because the first line is a normal line
+		val offset: Int = 2
+		(possibleCharacters(firstLetterStream(currentLine - offset)), possibleCharacters(
+			secondLetterStream(currentLine - offset)))
 	}
 }
